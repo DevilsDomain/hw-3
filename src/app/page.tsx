@@ -2,6 +2,7 @@
 import styles from './page.module.css';
 import useSWR from 'swr';
 import { useState, useCallback } from 'react';
+import PokeImage from '@/components/PokeImage';
 
 interface Pokemon {
   name: string;
@@ -20,6 +21,7 @@ export default function Home() {
   const [pokemon, setPokemon] = useState('');
   const { data, error } = useSWR('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0', fetcher);
 
+
   const handleClick = useCallback((event: HomeTypes) => {
     setPokemon(event.target.textContent);
   }, [setPokemon]);
@@ -35,14 +37,18 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <form onSubmit={handleSubmit}>
-        {data.results.map((pokemon: Pokemon, pokemonIndex: number) => {
-          return (
-            <p key={pokemonIndex} tabIndex={0} onClick={handleClick}>
-              {pokemon.name}
-            </p>
-          );
-        })}
-        <input type='submit' value='submit' />
+        <div className={styles.gird} >
+          {data.results.map((pokemon: Pokemon, pokemonIndex: number) => {
+            return (
+              <div key={pokemonIndex} className={styles.card}>
+                  <PokeImage pokemon={pokemon.name}></PokeImage>
+                <p tabIndex={0} onClick={handleClick}>
+                  {pokemon.name}</p>
+              </div>
+            );
+          })}
+        </div>
+        <input type='submit' value='Learn More' />
       </form>
     </main>
   );

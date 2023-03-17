@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Headder>Home</Headder>
+        <Headder>Pokedex</Headder>
         {children}
         </body>
     </html>
