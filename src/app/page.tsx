@@ -8,14 +8,15 @@ interface Pokemon {
   name: string;
   url: string;
 }
+type Fetch = typeof fetch;
+const fetcher = (...args: Parameters<Fetch>) => fetch(...args).then((res) => res.json());
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-interface HomeTypes extends React.MouseEvent<HTMLParagraphElement> {
-  target: {
+interface HomeTypes extends React.MouseEvent<HTMLParagraphElement, MouseEvent> {
+  target: EventTarget & {
     textContent: string;
   };
 }
+
 
 export default function Home() {
   const [pokemon, setPokemon] = useState('');
