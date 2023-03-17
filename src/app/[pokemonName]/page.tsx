@@ -8,9 +8,9 @@ import 'src/app/[pokemonName]/page.css';
 interface Params {
     pokemonName: string;
   }
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-export default function PokemonPage({ params }: { params: Params }) {
+  type Fetch = typeof fetch;
+  const fetcher = (...args: Parameters<Fetch>) => fetch(...args).then((res) => res.json());
+  export default function PokemonPage({ params }: { params: Params }) {
 
   const { data, error } = useSWR(`https://pokeapi.co/api/v2/pokemon/${params.pokemonName}`, fetcher);
   if (error) return <div>Failed to load</div>;
