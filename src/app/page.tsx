@@ -1,23 +1,49 @@
 'use client';
-import { Inter } from 'next/font/google'
-import styles from './page.module.css'
+import styles from './page.module.css';
 import useSWR from 'swr';
+import { useState, useCallback } from 'react';
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json())
+interface Pokemon {
+  name: string;
+  url: string;
+}
 
+const fetcher = (...args) => fetch(...args).then((res) => res.json());
+
+interface HomeTypes extends React.MouseEvent<HTMLParagraphElement> {
+  target: {
+    textContent: string;
+  };
+}
 
 export default function Home() {
-  const { data, error } = useSWR('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0', fetcher)
-  if (error) return <div>Failed to load</div>
-  if (!data) return <div>Loading...</div>
+  const [pokemon, setPokemon] = useState('');
+  const { data, error } = useSWR('https://pokeapi.co/api/v2/pokemon?limit=100&offset=0', fetcher);
+
+  const handleClick = useCallback((event: HomeTypes) => {
+    setPokemon(event.target.textContent);
+  }, [setPokemon]);
+
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    window.location.href = `/${pokemon}`;
+  }
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) return <div>Loading...</div>;
+
   return (
     <main className={styles.main}>
-      <p>hello</p>
-      {data.results.map((pokemon, pokemonIndex) => {
-        return(
-          <p key={pokemonIndex}>{pokemon.name}</p>
-        );
-      })}
+      <form onSubmit={handleSubmit}>
+        {data.results.map((pokemon: Pokemon, pokemonIndex: number) => {
+          return (
+            <p key={pokemonIndex} tabIndex={0} onClick={handleClick}>
+              {pokemon.name}
+            </p>
+          );
+        })}
+        <input type='submit' value='submit' />
+      </form>
     </main>
-  )
+  );
 }
