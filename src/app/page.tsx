@@ -48,7 +48,7 @@ export default function Home() {
             );
           })}
         </div>
-        <input type='submit' value='Learn More' />
+        <input type='submit' value='Learn More' className={styles.input} />
       </form>
     </main>
   );

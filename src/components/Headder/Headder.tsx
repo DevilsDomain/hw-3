@@ -1,23 +1,18 @@
 'use client';
 import React from 'react'
 import { useRouter } from 'next/navigation';
-import { Press_Start_2P } from 'next/font/google'
+import '../Headder/headder.css'
 
 type HeadderProps = {
     children: React.ReactNode; //👈 children prop typr
   };
-
-  const pokemon = Press_Start_2P({
-    weight: '400',
-    subsets: ['latin'],
-  })
   
 
 function Headder(props : HeadderProps) {
   const router = useRouter();
   return (
     <div>
-        <h1 onClick={() => router.push('/')} className={pokemon.className}>{props.children}</h1>
+        <h1 onClick={() => router.push('/')} className="h1">{props.children}</h1>
     </div>
   )
 }
