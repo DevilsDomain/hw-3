@@ -1,0 +1,33 @@
+.card {
+  height: 150px;
+  width: 150px;
+  background-color: #C3C9FF;
+  border-radius: 10px;
+  text-align: center;
+  padding-top: 10px;
+  cursor: pointer;
+}
+
+
+.gird {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.input {
+  height: 70px;
+  width: 130px;
+  border: none;
+  border-radius: 10px;
+  background-color: #E54222;
+  color: #F9FAFF;
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+

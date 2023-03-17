@@ -1,5 +1,5 @@
 import './globals.css'
-import Headder from '@/components/Headder'
+import Headder from '@/components/Headder/Headder'
 
 export const metadata = {
   title: 'Create Next App',
@@ -14,7 +14,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Headder>Home</Headder>
+        <Headder>Pokedex</Headder>
         {children}
         </body>
     </html>
